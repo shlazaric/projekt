@@ -11,14 +11,14 @@ views = Blueprint('views', __name__)
 @login_required
 def home():
     if request.method == 'POST':
-        note = request.form.get('note')  # Gets the note from the HTML
+        note = request.form.get('note')
 
         if len(note) < 1:
             flash('Biljeska (obaveza) je prekratka!', category='error')
         else:
-            # providing the schema for the note
+
             new_note = Note(data=note, user_id=current_user.id)
-            db.session.add(new_note)  # adding the note to the database
+            db.session.add(new_note)
             db.session.commit()
             flash('Obaveza dodana!', category='success')
 
